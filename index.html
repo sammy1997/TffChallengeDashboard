@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <style>
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+<body>
+<div class="sidebar" style="overflow-y:hidden;">
+  <form>
+    <div class="field">
+      <label>From</label>
+      <input type="date" id="myDate" value="" class="input">
+    </div>
+    <div class="field">
+      <label>To</label>
+      <input type="date" id="myDate" value="" class="input">
+    </div>
+    <div class="field">
+      <label>Location</label>
+      <select name="cars" class="input">
+      <option value="volvo">Pilani</option>
+      <option value="saab">Saab</option>
+      <option value="fiat">Fiat</option>
+      <option value="audi">Audi</option>
+      </select>
+    </div>
+    <div class="field">
+      <button type="submit" class="btn btn-success input">Process</button>
+    </div>
+  </form>
+  <div id="myDiv" style="height:350px;"></div>
+  <script src="js/main.js"></script>
+  <style>
+    .modebar{
+      visibility: hidden;
+    }
+  </style>
+</div>
+<div id="map"></div>
+<script type="text/javascript" src="js/index.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp-RZDm2aRnjSsmDyaiawf4AaO-NkwWrc&callback=initMap"
+async defer></script>
+
+</body>
