@@ -4,8 +4,39 @@
     <title>Dashboard</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="libs/font_awesome/css/font-awesome.min.css">
+    <script src= "https://cdn.zingchart.com/zingchart.min.js"></script>
+		<script> zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+		ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9","ee6b7db5b51705a13dc2339db3edaf6d"];</script>
+    <script type="text/javascript">
+    window.onload = function () {
 
+    var chart = new CanvasJS.Chart("myDiv", {
+    	theme: "dark2",
+    	animationEnabled: true, // change to true
+    	title:{
+    		text: "Predictions"
+    	},
+    	data: [
+    	{
+    		// Change type to "bar", "area", "spline", "pie",etc.
+    		type: "line",
+    		dataPoints: [
+    			{  y: 10  },
+    			{  y: 15  },
+    			{  y: 25  },
+    			{  y: 30  },
+    			{  y: 28  }
+    		]
+    	}
+    	]
+    });
+    chart.render();
+    var link = $(".canvasjs-chart-credit").addClass("hide")
+    }
+    </script>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <style>
       #map {
@@ -17,43 +48,117 @@
         margin: 0;
         padding: 0;
       }
+      .canvasjs-chart-toolbar{
+        visibility: hidden;
+        display: none;
+      }
+      .hide{
+        display: none;
+      }
+      @import 'https://fonts.googleapis.com/css?family=Montserrat';
+      @import 'https://fonts.googleapis.com/css?family=Lato:400';
+      html, body{
+        padding:1px;
+      }
+      .zc-abs{
+        display: block;
+      }
+      .zc-preview-handler, .zc-preview-mask{
+        visibility: collapse;
+        display: none;
+      }
+      #myChart a{
+        display: none;
+        visibility: hidden;
+      }
+      .date-wrap,.destination-wrap, .crop-wrap{
+        /* margin-bottom: 20px; */
+        width: 100%;
+        display: table;
+      }
+      .dates, .destination, .crop, .charecteristics{
+        padding: 10px;
+        display: table-cell;
+        width: 40%;
+      }
+      .field input,.field select{
+        border: 1.5px solid #0b385b;
+      }
+      .go-btn button{
+        width: 20%;
+        float: left;
+        background-color: #55b145;
+      }
+      .go-btn{
+        padding: 10px;
+      }
     </style>
   </head>
 <body>
 <div class="sidebar" style="overflow-y:hidden;">
   <form>
-    <div class="field">
-      <label>From</label>
+    <div class="date-wrap">
+    <div class="field dates">
+      <label><i class="fa fa-calendar" aria-hidden="true" style="color:#398ed3; margin-right:5px;"></i>From</label>
       <input type="date" id="myDate" value="" class="input">
     </div>
-    <div class="field">
-      <label>To</label>
+    <div class="field dates">
+      <label><i class="fa fa-calendar" aria-hidden="true" style="color:#398ed3; margin-right:5px;"></i>To</label>
       <input type="date" id="myDate" value="" class="input">
     </div>
-    <div class="field">
-      <label>Location</label>
-      <select name="cars" class="input">
-      <option value="volvo">Pilani</option>
-      <option value="saab">Saab</option>
-      <option value="fiat">Fiat</option>
-      <option value="audi">Audi</option>
+  </div>
+  <div class="destination-wrap">
+    <div class="field destination">
+      <label><i class="fa fa-map-marker" aria-hidden="true" style="color:#398ed3; margin-right:5px;"></i>Location</label>
+      <select name="cities" class="input">
+        <option value="pilani">Pilani</option>
+        <option value="kolkata">kolkata</option>
+        <option value="pune">Pune</option>
+        <option value="bombay">Mumbai</option>
       </select>
     </div>
-    <div class="field">
-      <button type="submit" class="btn btn-success input">Process</button>
+    <div class="field destination">
+      <label style="color:#242f3e;">Location</label>
+      <select name="states" class="input">
+        <option value="rajasthan">Rajasthan</option>
+        <option value="west-bengal">West Bengal</option>
+        <option value="maharashtra">Maharashtra</option>
+      </select>
+    </div>
+    </div>
+    <div class="crop-wrap">
+      <div class="field crop">
+        <label><i class="fa fa-pagelines" aria-hidden="true" style="color:#5dbe37; margin-right:5px;"></i>Crop</label>
+        <select name="cities" class="input">
+          <option value="rice">Rice</option>
+          <option value="wheat">Wheat</option>
+        </select>
+      </div>
+      <div class="field charecteristics">
+        <label><i class="fa fa-bar-chart" aria-hidden="true" style="color:#5dbe37; margin-right:5px;"></i>Charecteristics</label>
+        <select name="states" class="input">
+          <option value="rajasthan">Growth</option>
+          <option value="west-bengal">Yeild</option>
+        </select>
+      </div>
+      </div>
+    <div class="field go-btn">
+      <button type="submit" class="btn btn-success input">Go</button>
     </div>
   </form>
-  <div id="myDiv" style="height:350px;"></div>
-  <script src="js/main.js"></script>
-  <style>
+  <div id="myChart" style="height:400px;width:100%; overflow-y:hidden;"></div>
+  <!-- <script src="js/main.js"></script> -->
+  <!-- <style>
     .modebar{
       visibility: hidden;
     }
-  </style>
+  </style> -->
 </div>
 <div id="map"></div>
+
 <script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp-RZDm2aRnjSsmDyaiawf4AaO-NkwWrc&callback=initMap"
 async defer></script>
-
 </body>
